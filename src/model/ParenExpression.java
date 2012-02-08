@@ -11,12 +11,12 @@ public abstract class ParenExpression extends Expression
     {
         this.expressions = expressions;
     }  
-    protected List<RGBColor> evaluateExpressions()
+    protected List<RGBColor> evaluateExpressions(double x, double y)
     {
         List<RGBColor> types = new ArrayList<RGBColor>(expressions.size());
         for(Expression type : expressions) 
         {
-            types.add(type.evaluate());
+            types.add(type.evaluate(x,y));
         }
         return types;
     }   
@@ -26,8 +26,7 @@ public abstract class ParenExpression extends Expression
     }  
     public abstract static class Factory extends Expression.CommandFactory
     {
-        private static final Pattern EXPRESSION_BEGIN_REGEX =
-            Pattern.compile("\\(([a-z]+)");
+        private static final Pattern EXPRESSION_BEGIN_REGEX = Pattern.compile("\\(([a-z]+)");
         protected String getCommand(Parser parser) 
         {
             Matcher matcher = EXPRESSION_BEGIN_REGEX.matcher(parser.stringAtCurrentPosition());

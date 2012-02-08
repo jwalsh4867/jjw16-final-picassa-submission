@@ -38,6 +38,22 @@ public class Parser
 		expressionTypes.add(new NumberExpression.Factory());
 		expressionTypes.add(new X_Expression.Factory());
 		expressionTypes.add(new Y_Expression.Factory());
+		expressionTypes.add(new AbsoluteExpression.Factory());
+		expressionTypes.add(new ArcTanExpression.Factory());
+		expressionTypes.add(new CeilExpression.Factory());
+		expressionTypes.add(new ClampExpression.Factory());
+		expressionTypes.add(new CosExpression.Factory());
+		expressionTypes.add(new FloorExpression.Factory());
+		expressionTypes.add(new Log10Expression.Factory());
+		expressionTypes.add(new LogExpression.Factory());
+		expressionTypes.add(new PerlinBWdoubleExpression.Factory());
+		expressionTypes.add(new PerlinColorDoubleExpression.Factory());
+		expressionTypes.add(new RandomExpression.Factory());
+		expressionTypes.add(new RGBtoYCrCbExpression.Factory());
+		expressionTypes.add(new SinExpression.Factory());
+		expressionTypes.add(new TanExpression.Factory());
+		expressionTypes.add(new WrapExpression.Factory());
+		expressionTypes.add(new YCrCbtoRGBExpression.Factory());
 	}
 	/**
 	 * Converts given string into expression tree.
@@ -91,5 +107,16 @@ public class Parser
 	private boolean notAtEndOfString ()
 	{
 		return myCurrentPosition < myInput.length();
+	}
+	public CharSequence getmyInput() {
+		return myInput; 
+	}
+
+	public int getCurrentPosition(){
+		return myCurrentPosition;
+	}
+
+	public void setCurrentPosition(int POS){
+		myCurrentPosition = POS; 
 	}
 }

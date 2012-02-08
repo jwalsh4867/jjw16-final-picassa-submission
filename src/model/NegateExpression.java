@@ -11,12 +11,12 @@ public class NegateExpression extends ParenExpression
     }
     public static RGBColor negate (RGBColor var)
     {
-        return new RGBColor(-var.getRed(), -var.getGreen(), -var.getBlue());
+        return new RGBColor(1 / var.getRed(), 1 / var.getGreen(), 1 / var.getBlue());
     }
     @Override
-    public RGBColor evaluate() 
+    public RGBColor evaluate(double x, double y) 
     {
-        List<RGBColor> types = evaluateExpressions();
+        List<RGBColor> types = evaluateExpressions(x,y);
         return NegateExpression.negate(types.get(0));
     }    
     public static class Factory extends ParenExpression.Factory

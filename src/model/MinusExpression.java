@@ -1,6 +1,6 @@
 package model;
 
-import java.util.List; 
+import java.util.List;  
 import model.RGBColor;
 
 
@@ -17,9 +17,9 @@ public class MinusExpression extends ParenExpression
                             left.getBlue() - right.getBlue());
     }
     @Override
-    public RGBColor evaluate() 
+    public RGBColor evaluate(double x, double y) 
     {
-        List<RGBColor> Types = evaluateExpressions();
+        List<RGBColor> Types = evaluateExpressions(x,y);
         return MinusExpression.minus(Types.get(0),Types.get(1));
     }  
     public static class Factory extends ParenExpression.Factory

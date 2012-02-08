@@ -17,9 +17,9 @@ public class ExponentExpression extends ParenExpression
                             Math.pow(left.getBlue(), right.getBlue()));
     }
     @Override
-    public RGBColor evaluate() 
+    public RGBColor evaluate(double x, double y) 
     {
-        List<RGBColor> types = evaluateExpressions();
+        List<RGBColor> types = evaluateExpressions(x,y);
         return ExponentExpression.exponent(types.get(0), types.get(1));
     }  
     public static class Factory extends ParenExpression.Factory

@@ -13,7 +13,6 @@ public class Model
     public static final double DOMAIN_MIN = -1;
     public static final double DOMAIN_MAX = 1;
 
-
     /**
      * Evaluate an expression for each point in the image.
      */
@@ -30,7 +29,7 @@ public class Model
             {
                 double evalX = imageToDomainScale(imageX, size.width);
                 result.setColor(imageX, imageY,
-                                toEval.evaluate().toJavaColor());
+                                toEval.evaluate(evalX, evalY).toJavaColor());
             }
         }
         return result;

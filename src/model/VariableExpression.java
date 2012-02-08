@@ -4,46 +4,38 @@ import java.util.*;
 import java.util.regex.*;
 import model.*;
 
-//public class VariableExpression extends Expression
-//{
-//	private String variable;
-//	public VariableExpression(String var){
-//		this.variable = var;
-//	}
-//	public RGBColor evaluate(){ 
-//		if (variable.equals("x"))
-//		{ 
-//			return new RGBColor(x);
-//		}
-//		else if (variable.equals("y"))
-//		{
-//			return new RGBColor(y);
-//		}
-//	}
-//	public static class Factory extends Expression.CommandFactory
-//	{
-//		private static final Pattern VARIABLE_REGEX = Pattern.compile("[xy]");
-//		@Override
-//        public boolean expressionType(Parser parser) 
-//        {
-//            return regMatcher(VARIABLE_REGEX, parser);
-//        }
-//		 @Override
-//	     public Expression parseExpression(Parser parser) 
-//	    {
-//			 String input = parser.stringAtCurrentPosition();
-//			 Matcher varMatcher = VARIABLE_REGEX.matcher(input);
-//			 varMatcher.find(0);
-//			 String varMatch = input.substring(varMatcher.start(), varMatcher.end());
-//			 parser.advanceCurrentPosition(varMatch.length());
-//			 if (varMatch.equals("x")) 
-//			 { 
-//				 return new VariableExpression("x");
-//			 }
-//			 else if (varMatch.equals("y"))
-//			 {
-//				 return new VariableExpression("y");
-//			 }
-//	    }
-//	}
-//}
+public abstract class VariableExpression extends Expression
+{ 
+    private static final Pattern CHARACTER_REGEX = Pattern.compile("([a-z]+)");
+
+    public static abstract class Factory extends Expression.CommandFactory
+    {
+		protected abstract String commandName();   
+		protected abstract VariableExpression makeExpression();
+
+		@Override 
+		public boolean expressionType(Parser parser) 
+		{
+	        Matcher varMatcher = CHARACTER_REGEX.matcher(parser.stringAtCurrentPosition());
+	            if(varMatcher.lookingAt())
+	            {
+	            	return getCommand(parser).equals(commandName());
+	            }
+	            return false;  
+		}
+		protected String getCommand(Parser parser)
+		{
+	        Matcher characterMatcher = CHARACTER_REGEX.matcher(parser.getmyInput());
+	        characterMatcher.find(parser.getCurrentPosition());
+	        String matches = ((String)parser.getmyInput()).substring(characterMatcher.start(), characterMatcher.end());
+	        return matches; 
+	    }
+		@Override 
+		public Expression parseExpression(Parser parser) 
+		{
+			parser.advanceCurrentPosition(commandName().length());
+			parser.skipWhiteSpace();
+	        return makeExpression();
+		}
+    }
+}

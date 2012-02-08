@@ -194,7 +194,7 @@ public class RGBColor implements Comparable<RGBColor>, Iterable<Double>
     /**
      * Clamps the given value to the Color's max and min values.
      */
-    private double clamp (double value)
+    public static double clamp (double value)
     {
         return Math.max(COLOR_MIN, Math.min(COLOR_MAX, value));
     }
@@ -203,7 +203,7 @@ public class RGBColor implements Comparable<RGBColor>, Iterable<Double>
     /**
      * Wraps the given value around the RGBColor's max and min values.
      */
-    private double wrap (double value)
+    public static double wrap (double value)
     {
         double range = COLOR_MAX - COLOR_MIN;
         value %= range;

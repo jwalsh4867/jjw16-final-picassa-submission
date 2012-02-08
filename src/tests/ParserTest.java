@@ -27,19 +27,19 @@ public class ParserTest
 
 
     @Test
-    public void testConstant ()
+    public void testConstant (double x, double y)
     {
-        RGBColor actual = myParser.makeExpression("1").evaluate();
+        RGBColor actual = myParser.makeExpression("1").evaluate(x,y);
         assertTrue(WHITE.equals(actual));
-        actual = myParser.makeExpression("-1").evaluate();
+        actual = myParser.makeExpression("-1").evaluate(x,y);
         assertTrue(BLACK.equals(actual));
-        actual = myParser.makeExpression("0.5").evaluate();
+        actual = myParser.makeExpression("0.5").evaluate(x,y);
         assertTrue(GRAY.equals(actual));
-        actual = myParser.makeExpression(".5").evaluate();
+        actual = myParser.makeExpression(".5").evaluate(x,y);
         assertTrue(GRAY.equals(actual));
         try
         {
-            myParser.makeExpression("0.5 0.5").evaluate();
+            myParser.makeExpression("0.5 0.5").evaluate(x,y);
             fail("Exception should have been thrown");
         }
         catch (ParserException e)
@@ -52,19 +52,19 @@ public class ParserTest
 
 
     @Test
-    public void testBinaryOps ()
+    public void testBinaryOps (double x, double y)
     {
-        RGBColor actual = myParser.makeExpression("(plus .1 .9)").evaluate();
+        RGBColor actual = myParser.makeExpression("(plus .1 .9)").evaluate(x,y);
         assertTrue(WHITE.equals(actual));
-        actual = myParser.makeExpression("(plus (plus 0.01 0.09) (plus 0.4 0.5))").evaluate();
+        actual = myParser.makeExpression("(plus (plus 0.01 0.09) (plus 0.4 0.5))").evaluate(x,y);
         assertTrue(WHITE.equals(actual));
-        actual = myParser.makeExpression("    (plus(plus 0.01 0.09)(plus 0.4 0.5   ))    ").evaluate();
+        actual = myParser.makeExpression("    (plus(plus 0.01 0.09)(plus 0.4 0.5   ))    ").evaluate(x,y);
         assertTrue(WHITE.equals(actual));
-        actual = myParser.makeExpression("(minus (div 1.8 2) (mul -10 0.01))").evaluate();
+        actual = myParser.makeExpression("(minus (div 1.8 2) (mul -10 0.01))").evaluate(x,y);
         assertTrue(WHITE.equals(actual));
         try
         {
-            myParser.makeExpression("(fooo 0.1 0.9)").evaluate();
+            myParser.makeExpression("(fooo 0.1 0.9)").evaluate(x,y);
             fail("Exception should have been thrown");
         }
         catch (ParserException e)

@@ -14,9 +14,9 @@ public class ColorExpression extends ParenExpression
     	return new RGBColor(red.getRed(), green.getGreen(), blue.getBlue());
     }
     @Override
-    public RGBColor evaluate() 
+    public RGBColor evaluate(double x, double y) 
     {
-        List<RGBColor> types = evaluateExpressions();
+        List<RGBColor> types = evaluateExpressions(x,y);
         return ColorExpression.color(types.get(0), types.get(1), types.get(2));
     }    
     public static class Factory extends ParenExpression.Factory

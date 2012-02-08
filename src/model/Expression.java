@@ -15,7 +15,7 @@ import model.*;
  */
 public abstract class Expression
 {
-    public abstract RGBColor evaluate ();
+    public abstract RGBColor evaluate (double x, double y);
     public static abstract class CommandFactory
     {
         public abstract boolean expressionType(Parser parser);

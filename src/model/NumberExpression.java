@@ -13,7 +13,7 @@ public class NumberExpression extends Expression
         this.color = gray;
     }
     @Override
-    public RGBColor evaluate() 
+    public RGBColor evaluate(double x, double y) 
     {
         return color;
     }
